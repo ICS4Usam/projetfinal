@@ -1,3 +1,15 @@
+const fs = require('fs');
+
+const html = `<!DOCTYPE html>
+<html>
+<head>
+<title>My Dynamic HTML Page</title>
+</head>
+<body>
+<h1>Hello World</h1>
+</body>
+</html>`;
+
 function sauvegarder() {
   var message = document.getElementById("text");
   var title = document.getElementById("txt_title");
@@ -15,23 +27,10 @@ function sauvegarder() {
     document.getElementsByClassName("img_1")[0].appendChild(elem);
 
 
-    var newDoc = document.implementation.createHTMLDocument();
-
-    var linkText = 'my link text';
-    newDoc.body.innerHTML =
-      `<h1>This is a new document</h1>
-      <p>Click <a href="https://www.example.com">${linkText}</a> to visit example.com</p>`;
-
-
-    document.open();
-    document.write(newDoc.documentElement.innerHTML);
-
-
-    var link = document.createElement('a');
-    link.href = 'data:text/html,' + encodeURIComponent(newDoc.documentElement.innerHTML);
-    link.download = 'new-document.html';
-    link.textContent = 'Download new document';
-    document.body.appendChild(link);
+    fs.writeFile('newpage.html', html, (err) => {
+      if (err) throw err;
+      console.log('File created successfully.');
+    });
 
   }
 }
