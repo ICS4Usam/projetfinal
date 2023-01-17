@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet Final</title>
+    <link rel="stylesheet" href="homepage_style.css">
+    <script src="bundle.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <div id="haut_de_page">
+            <div class="titre">
+                <h1>
+                    Bienvenue!
+                </h1>
+            </div>
+            <div class="barre">
+                <ul class="liste">
+                    <li><a href="valeur"> Accueil </a></li>
+                </ul>
+                <ul class="liste">
+                    <li><a href="valeur"> Règles </a></li>
+                </ul>
+                <ul class="liste">
+                    <li><a href="valeur"> Questions </a></li>
+                </ul>
+                <ul class="liste">
+                    <li><a href="valeur"> Aide </a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="THREADS">
+
+            <div id="thread_1">
+
+                <div class="img_1">
+                    <!--<img src="adambsd.jpg" alt="img" style="width: 100%; height: 100%;">-->
+                </div>
+
+                <div class="txt_1">
+
+                </div>
+
+            </div>
+
+            <div id="CREATE_THREAD">
+
+                <h3>Créer une conversation</h3>
+
+                <input type="file" id="image_input" accept="image/jpeg, image/png, image/jpg">
+                <script>
+
+                    const input = document.querySelector("#image_input");
+                    var uploadedimage = "";
+
+                    input.addEventListener("change", function () {
+                        const reader = new FileReader();
+                        reader.addEventListener("load", () => {
+                            uploadedimage = reader.result;
+                        });
+                        reader.readAsDataURL(this.files[0])
+                    });
+
+                </script>
+
+                <br>
+
+                Écrire un message:
+
+                <div class="txt_écrire">
+                    <textarea name="msg" id="text" cols="30" rows="10"></textarea>
+                </div>
+
+                <div id="details">
+                    <div class="title">
+                        <textarea name="title" id="txt_title" cols="1" rows="1"></textarea>
+                    </div>
+                    <div class="btn_completer">
+                        <button onclick="sauvegarder()"> Compléter </button>
+                        <script>
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+
+},{}],2:[function(require,module,exports){
+function sauvegarder() {
+  var message = document.getElementById("text");
+  var title = document.getElementById("txt_title");
+
+  if (uploadedimage != "" && message.value != "" && title.value != "") {
+    var elem = document.createElement("img");
+    elem.setAttribute("src", uploadedimage);
+    elem.setAttribute("alt", "img");
+
+    var link = document.createElement('a')
+    var title_txt = title.value;
+    console.log(title_txt);
+
+    document.getElementsByClassName("txt_1")[0].textContent = message.value;
+    document.getElementsByClassName("img_1")[0].appendChild(elem);
+
+    const fs = require('fs');
+
+    const html = `<!DOCTYPE html>
+    <html>
+    <head>
+    <title>My Dynamic HTML Page</title>
+    </head>
+    <body>
+    <h1>Hello World</h1>
+    </body>
+    </html>`;
+    
+    fs.writeFile('newpage.html', html, (err) => {
+      if (err) throw err;
+      console.log('File created successfully.');
+    });
+
+  }
+}
+},{"fs":1}]},{},[2]);
+                        </script>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+</body>
+
+</html>
